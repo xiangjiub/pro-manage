@@ -1,0 +1,19 @@
+{
+  "name": "pro-manage",
+  "version": "1.0.0",
+  "description": "vue3的任务管理",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiangjiub/pro-manage.git"
+  },
+  "author": "xjb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiangjiub/pro-manage/issues"
+  },
+  "homepage": "https://github.com/xiangjiub/pro-manage#readme"
+}
