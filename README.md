@@ -1,4 +1,6 @@
 # pro-manage
+### 项目说明
+使用vue3，vuex，ts 开发的工作任务分配工具
 
 ## Project setup
 ```
