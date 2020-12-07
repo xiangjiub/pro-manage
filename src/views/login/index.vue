@@ -47,6 +47,7 @@ export default defineComponent({});
       padding: 0;
       color: #fff;
       text-align: center;
+      margin-bottom: 20px;
     }
     .inputBox {
       position: relative;
@@ -76,6 +77,9 @@ export default defineComponent({});
         left: 0px;
         color: #03a9f4;
         font-size: 12px;
+      }
+      input:focus {
+        border-bottom: 2px solid #03a9f4;
       }
     }
     input[type="submit"] {
