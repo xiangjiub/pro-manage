@@ -2,24 +2,59 @@
   <div class="des">
     <div class="box">
       <h2>Login</h2>
-      <form>
+      <form :v-model="formData" ref="formRef">
         <div class="inputBox">
-          <input type="text" name="" required="" value="" />
-          <label>Username</label>
+          <input
+            type="text"
+            required=""
+            v-model="formData.account"
+            placeholder="Username"
+          />
+          <!-- <label>Username</label> -->
         </div>
         <div class="inputBox">
-          <input type="password" name="" required="" value="" />
-          <label>password</label>
+          <input
+            type="password"
+            required=""
+            v-model="formData.password"
+            placeholder="password"
+          />
+          <!-- <label>password</label> -->
         </div>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" @click="login" />
       </form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({});
+interface LoginForm {
+  username: string;
+  password: string;
+}
+
+import { defineComponent, reactive, ref, unref } from "vue";
+export default defineComponent({
+  setup() {
+      
+    const formRef = ref<any>(null);
+    
+    const formData = reactive({
+      account: "xjb",
+      password: "123456",
+    });
+
+    async function handleLogin() {
+      console.log("xs");
+    }
+
+    return {
+      formRef,
+      formData,
+      login: handleLogin,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -55,6 +90,7 @@ export default defineComponent({});
         width: 100%;
         padding: 12px 0;
         font-size: 16px;
+        margin-bottom: 15px;
         color: #000;
         border: none;
         outline: none;

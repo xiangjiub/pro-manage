@@ -6,12 +6,18 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta:{
+      isLogin:false
+    }
   },
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta:{
+      isLogin:true
+    }
   },
   {
     path: '/about',
