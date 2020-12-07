@@ -50,8 +50,9 @@ export default defineComponent({
         console.log("开始请求");
       // 1.向后台传输数据，并接收返回值
       api.denglu(loginData).then((data) => {
+          console.log(data);
         // 从后台成功取到数据
-        if (data.data.status === 200) {
+        if (data.data.code === 200) {
           //成功取到数据
           localStorage.setItem("token", data.data.token); //存储token
           localStorage.setItem("user", data.data.user); //存储用户
@@ -60,6 +61,8 @@ export default defineComponent({
           //     user: data.data.user,
           //   });
           //   this.$router.push("/homes");
+        }else if (data.data.code === 400) {
+          console.log('密码不对');
         } else {
           if (data.data.status === 1000) {
             // 没有取到数据
