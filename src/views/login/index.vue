@@ -7,7 +7,7 @@
           <input
             type="text"
             required=""
-            v-model="formData.account"
+            v-model="formData.username"
             placeholder="Username"
           />
           <!-- <label>Username</label> -->
@@ -21,30 +21,54 @@
           />
           <!-- <label>password</label> -->
         </div>
-        <input type="submit" value="Submit" @click="login" />
+        <input type="button" value="Submit" @click="login" />
       </form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-interface LoginForm {
-  username: string;
-  password: string;
-}
-
 import { defineComponent, reactive, ref, unref } from "vue";
+import api from "@/api/index";
+import { LoginForm } from "../../api/model/LoginForm";
+
 export default defineComponent({
   setup() {
-      
     const formRef = ref<any>(null);
-    
+
     const formData = reactive({
-      account: "xjb",
+      username: "xjb",
       password: "123456",
     });
 
     async function handleLogin() {
+
+      const loginData: LoginForm = {
+        username: formData.username,
+        password: formData.password,
+      };
+        console.log("开始请求");
+      // 1.向后台传输数据，并接收返回值
+      api.denglu(loginData).then((data) => {
+        // 从后台成功取到数据
+        if (data.data.status === 200) {
+          //成功取到数据
+          localStorage.setItem("token", data.data.token); //存储token
+          localStorage.setItem("user", data.data.user); //存储用户
+          //   this.LOGIN({
+          //     token: data.data.token,
+          //     user: data.data.user,
+          //   });
+          //   this.$router.push("/homes");
+        } else {
+          if (data.data.status === 1000) {
+            // 没有取到数据
+            // this.$router.push("/");
+            // this.loginLoadingState = false;
+            // this.logins = "登陆";
+          }
+        }
+      });
       console.log("xs");
     }
 
@@ -118,7 +142,7 @@ export default defineComponent({
         border-bottom: 2px solid #03a9f4;
       }
     }
-    input[type="submit"] {
+    input[type="button"] {
       background: transparent;
       border: none;
       outline: none;
