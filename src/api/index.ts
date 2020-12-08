@@ -8,15 +8,12 @@ export default {
  
   // 登陆
   denglu: (data: LoginForm) => {
-    
-    // console.log(data);
     console.log("请求中。。");
-    console.log(axios);
     return axios.post('/login', data)
   },
   // 验证token
   homes: () => {
-    return axios.get('/login/test');
+    return axios.get('/home');
   },
   // 列表
   lists: () => {

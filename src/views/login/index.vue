@@ -31,38 +31,41 @@
 import { defineComponent, reactive, ref, unref } from "vue";
 import api from "@/api/index";
 import { LoginForm } from "../../api/model/LoginForm";
-
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default defineComponent({
   setup() {
     const formRef = ref<any>(null);
-
+    const router = useRouter();
+    const store = useStore();
     const formData = reactive({
       username: "xjb",
       password: "123456",
     });
 
     async function handleLogin() {
-
       const loginData: LoginForm = {
         username: formData.username,
         password: formData.password,
       };
-        console.log("开始请求");
+      console.log("开始请求");
       // 1.向后台传输数据，并接收返回值
-      api.denglu(loginData).then((data) => {
-          console.log(data);
+      api.denglu(loginData).then((data: any) => {
+        console.log(data);
         // 从后台成功取到数据
         if (data.data.code === 200) {
           //成功取到数据
           localStorage.setItem("token", data.data.token); //存储token
           localStorage.setItem("user", data.data.user); //存储用户
-          //   this.LOGIN({
-          //     token: data.data.token,
-          //     user: data.data.user,
-          //   });
+          store.commit("userStatus", true);
+          store.commit("LOGIN", {
+            token: data.data.token,
+            user: data.data.user,
+          });
           //   this.$router.push("/homes");
-        }else if (data.data.code === 400) {
-          console.log('密码不对');
+          router.push("/home");
+        } else if (data.data.code === 400) {
+          console.log("密码不对");
         } else {
           if (data.data.status === 1000) {
             // 没有取到数据
@@ -72,7 +75,6 @@ export default defineComponent({
           }
         }
       });
-      console.log("xs");
     }
 
     return {

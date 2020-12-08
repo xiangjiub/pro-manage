@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
     meta:{
@@ -54,46 +54,62 @@ const router = createRouter({
 // });
 
 //#region 
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
  
-  //获取用户登录成功后储存的登录标志
-  const getFlag = localStorage.getItem("token");
-  const getid = localStorage.getItem("user");
-  //如果登录标志存在且为isLogin，即用户已登录
-  if (getFlag === "isLogin"&&getid !== null) {
+//   //获取用户登录成功后储存的登录标志
+//   const getFlag = localStorage.getItem("token");
+//   const getid = localStorage.getItem("user");
+//   console.log(getFlag,`user:---${getid}`)
+//   //如果登录标志存在且为isLogin，即用户已登录
+//   if (getFlag === "isLogin"&&getid !== null) {
 
-      //设置vuex登录状态为已登录
-      store.state.isLogin = true;
-      next();
+//       //设置vuex登录状态为已登录
+//       store.state.isLogin = true;
+//       next();
 
-      //如果已登录，还想想进入登录注册界面，则定向回首页
-      // if (!to.meta.isLogin) {
-      //     //iViewUi友好提示
-      //     // iView.Message.error('请先退出登录');
-      //     next({
-      //         path: '/'
-      //     })
-      // }
+//       //如果已登录，还想想进入登录注册界面，则定向回首页
+//       // if (!to.meta.isLogin) {
+//       //     //iViewUi友好提示
+//       //     // iView.Message.error('请先退出登录');
+//       //     next({
+//       //         path: '/'
+//       //     })
+//       // }
 
-      //如果登录标志不存在，即未登录
-  } else {
+//       //如果登录标志不存在，即未登录
+//   } else {
 
-      //用户想进入需要登录的页面，则定向回登录界面
-      if (to.meta.isLogin) {
-          next({
-              path: '/login',
-          })
-          //用户进入无需登录的界面，则跳转继续
-      } else {
-          next()
-      }
+//       //用户想进入需要登录的页面，则定向回登录界面
+//       if (to.meta.isLogin) {
+//           next({
+//               path: '/login',
+//           })
+//           //用户进入无需登录的界面，则跳转继续
+//       } else {
+//           next()
+//       }
 
-  }
+//   }
 
-});
+// });
 
-router.afterEach(() => {
-  window.scroll(0, 0);
-});
+// router.afterEach(() => {
+//   window.scroll(0, 0);
+// });
 //#endregion
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.isLogin) { //权限判断
+    if (localStorage.getItem('token')) { //读取token值
+    //  成功
+      next()
+    } else {
+      next({path:'/'})
+    }
+  } else {
+    // 没有meta.auth 不用管
+    next()
+  }
+});
+
 export default router
