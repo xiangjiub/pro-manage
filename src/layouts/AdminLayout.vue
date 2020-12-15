@@ -1,22 +1,6 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
-      <div class="logo" />
-      <a-menu theme="dark" mode="inline" v-model:selectedKeys="selectedKeys">
-        <a-menu-item key="1">
-          <user-outlined />
-          <span>nav 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <video-camera-outlined />
-          <span>nav 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <upload-outlined />
-          <span>nav 3</span>
-        </a-menu-item>
-      </a-menu>
-    </a-layout-sider>
+    <side-menu :collapsed="collapsed" :collapsible="true" />
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
         <menu-unfold-outlined
@@ -45,28 +29,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
+  // UserOutlined,
+  // VideoCameraOutlined,
+  // UploadOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from "@ant-design/icons-vue";
+import SideMenu from "@/components/menu/SideMenu.vue";
 export default defineComponent({
   components: {
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
+    // UserOutlined,
+    // VideoCameraOutlined,
+    // UploadOutlined,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
+    SideMenu,
   },
   data() {
     return {
-      selectedKeys: ["1"],
-      collapsed: false,
+      // selectedKeys: ["1"],
+      collapsed:false
     };
   },
+  // setup() {
+  //   const collapsed = ref(false);
+  //   return { collapsed };
+  // },
 });
 </script>
 
@@ -83,10 +73,13 @@ export default defineComponent({
   .trigger:hover {
     color: #1890ff;
   }
-  .logo {
-    height: 32px;
-    background: rgba(223, 20, 20, 0.2);
-    margin: 16px;
+  .side-menu {
+    &.fixed-side {
+      position: fixed;
+      height: 100vh;
+      left: 0;
+      top: 0;
+    }
   }
 }
 </style>
