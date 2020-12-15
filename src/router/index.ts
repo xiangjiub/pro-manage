@@ -2,6 +2,7 @@ import store from '@/store'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/login/index.vue'
+import AdminLayout from '@/layouts/AdminLayout.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -15,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'Home',
-    component: Home,
+    component: AdminLayout,
     meta:{
       isLogin:true
     }
