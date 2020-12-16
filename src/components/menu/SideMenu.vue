@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider
+  <!-- <a-layout-sider
     collapsed="collapsed"
     :trigger="null"
     :collapsible='collapsible'
@@ -9,8 +9,23 @@
     <div class="logo">
       <img src="@/assets/logo.png" />
       <h1>Vue3测试版</h1>
+    </div> -->
+
+  <a-layout-sider
+    width="256px"
+    :collapsible="collapsible"
+    :collapsed="collapsed"
+    :trigger="null"
+  >
+    <div :class="['logo']">
+      <router-link to="/dashboard/workplace">
+        <img src="@/assets/logo.png" />
+      </router-link>
     </div>
-    <a-menu
+    <!-- <i-menu :theme="theme" :collapsed="collapsed" :options="menuData" @select="onSelect" class="menu"/> -->
+  </a-layout-sider>
+
+  <!-- <a-menu
       theme="dark"
       mode="inline"
       :inline-collapsed="collapsed"
@@ -24,30 +39,28 @@
         <a-menu-item key="9">Option 9</a-menu-item>
         <a-menu-item key="10">Option 10</a-menu-item>
       </a-sub-menu>
-    </a-menu>
-  </a-layout-sider>
+    </a-menu> -->
+  <!-- </a-layout-sider> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import {
-  UserOutlined
-} from "@ant-design/icons-vue";
+import { UserOutlined } from "@ant-design/icons-vue";
 export default defineComponent({
   name: "SideMenu",
-  components:{
-      UserOutlined
+  components: {
+    // UserOutlined
   },
-    props: {
+  props: {
     collapsible: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     collapsed: {
       type: Boolean,
-    //   required: false,
-      default: false
+      required: false,
+      default: false,
     },
     // menuData: {
     //   type: Array,
@@ -63,19 +76,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-  .logo {
-    height: 32px;
-    margin: 20px;
-    overflow: hidden;
-    img {
-      width: 32px;
-    }
-    h1 {
-      color: #fff;
-      font-size: 20px;
-      margin: 0 0 0 12px;
-      display: inline-block;
-      vertical-align: middle;
-    }
+.logo {
+  height: 32px;
+  margin: 20px;
+  overflow: hidden;
+  img {
+    width: 32px;
   }
+  h1 {
+    color: #fff;
+    font-size: 20px;
+    margin: 0 0 0 12px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
 </style>

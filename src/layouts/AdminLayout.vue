@@ -1,6 +1,10 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
-    <side-menu :collapsed="collapsed" :collapsible="true" />
+    <!-- <side-menu :collapsed="collapsed" :collapsible="true" /> -->
+    <side-menu
+      :collapsed="collapsed"
+      :collapsible="true"
+    />
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
         <menu-unfold-outlined
@@ -50,7 +54,10 @@ export default defineComponent({
   data() {
     return {
       // selectedKeys: ["1"],
-      collapsed:false
+      minHeight: window.innerHeight - 64 - 122,
+      collapsed: false,
+      showSetting: false,
+      drawerOpen: false,
     };
   },
   // setup() {
