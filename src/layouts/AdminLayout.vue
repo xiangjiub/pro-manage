@@ -60,65 +60,66 @@ export default defineComponent({
       // collapsed: false,
       // showSetting: false,
       // drawerOpen: false,
-       list: [
+      list: [
         {
-          key: '1',
-          title: '项目信息管理',
-          path: '/infomationManage',
-          icon:'iconfont icon-information'
-        },
-        {
-          key: '2',
-          title: '安全信息管理',
-          path: '/safeInfoManage',
-          icon:'iconfont icon-anquan',
+          path: "/demos",
+          name: 'demos',
+          redirect: "/demos/custom-a-custom-modal",
+          // component: markRaw(RouterTransition),
+          meta: {
+            title: "demo演示",
+            icon: "icon-zhuomian",
+            // hidden:false
+          },
           children: [
             {
-              key: '2.1',
-              title: '安全风险管理',
-              path: '/safeRisk',
-              icon:'',
-              children: [
-                { 
-                  key: '2.1.1',
-                  title: '风险分类管理',
-                  path: '/riskClassifyManage',
-                  icon:'',
-                },
-                {
-                    key: '2.1.2',
-                    title: '分类辨识',
-                    path: '/classifyIdentity',
-                    icon:'',
-                }
-              ],
+              path: "custom-a-custom-modal",
+              name: `demos-custom-modal`,
+              meta: {
+                title: "自定义模态框",
+                icon: "icon-zhuomian",
+              },
+              component: () => import(/* webpackChunkName: "demos-custom-a-custom-modal" */ '@/views/demo/custom-modal.vue')
+            },
+            {
+              path: "button",
+              name: `demos-button`,
+              meta: {
+                title: "按钮的扩展",
+                icon: "icon-zhuomian",
+              },
+              component: () => import(/* webpackChunkName: "demos-custom-a-custom-modal" */ '@/views/demo/custom-modal.vue')
+            },
+            {
+              path: "form",
+              name: `demos-form`,
+              meta: {
+                title: "验证表单",
+                icon: "icon-zhuomian",
+              },
+              component: () => import(/* webpackChunkName: "demos-custom-a-custom-modal" */ '@/views/demo/custom-modal.vue')
+            },
+            {
+              path: "icons",
+              name: `demos-icons`,
+              meta: {
+                title: "自定义图标",
+                icon: "icon-zhuomian",
+              },
+              component: () => import(/* webpackChunkName: "demos-custom-a-custom-modal" */ '@/views/demo/custom-modal.vue')
             },
           ],
         },
-        {
-          key: '3',
-          title: '质量信息管理',
-          path: '/qualityInfoManage',
-          icon:'iconfont icon-zhiliang',
-          children:[
-              {
-                  key: '3.1',
-                  title: '质量控制点管理',
-                  path: '/controlPointManage',
-                  icon:'',
-              }
-          ]
-        }
       ],
     };
   },
   setup() {
-    const theme = ref('light');
+    const theme = ref("light");
     const collapsed = ref(false);
     const showSetting = ref(false);
     const drawerOpen = ref(false);
 
-    return { theme,collapsed,showSetting,drawerOpen };
+    return { theme, collapsed, showSetting, drawerOpen };
   },
 });
 </script>

@@ -1,0 +1,44 @@
+{
+    "path": "/demos",
+    "name": "demos",
+    "redirect": "/demos/custom-a-custom-modal",
+    "meta": {
+        "title": "demo演示",
+        "icon": "icon-zhuomian",
+        "hidden": false
+    },
+    "children": [
+        {
+            "path": "custom-a-custom-modal",
+            "name": "demos-custom-modal",
+            "meta": {
+                "title": "自定义模态框",
+                "icon": "icon-zhuomian"
+            }
+        },
+        {
+            "path": "button",
+            "name": "demos-button",
+            "meta": {
+                "title": "按钮的扩展",
+                "icon": "icon-zhuomian"
+            }
+        },
+        {
+            "path": "form",
+            "name": "demos-form",
+            "meta": {
+                "title": "验证表单",
+                "icon": "icon-zhuomian"
+            }
+        },
+        {
+            "path": "icons",
+            "name": "demos-icons",
+            "meta": {
+                "title": "自定义图标",
+                "icon": "icon-zhuomian"
+            }
+        }
+    ]
+}
