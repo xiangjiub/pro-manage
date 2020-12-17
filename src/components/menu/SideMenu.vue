@@ -16,6 +16,7 @@
     :collapsible="collapsible"
     :collapsed="collapsed"
     :trigger="null"
+    :theme="theme"
   >
     <div :class="['logo']">
       <router-link to="/dashboard/workplace">
@@ -62,15 +63,15 @@ export default defineComponent({
       required: false,
       default: false,
     },
-    // menuData: {
-    //   type: Array,
-    //   required: true
-    // },
-    // theme: {
-    //   type: String,
-    //   required: false,
-    //   default: 'dark'
-    // }
+    menuData: {
+      type: Array,
+      required: true,
+    },
+    theme: {
+      type: String,
+      required: false,
+      default: "dark",
+    },
   },
 });
 </script>

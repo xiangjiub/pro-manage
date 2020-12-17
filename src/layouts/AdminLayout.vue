@@ -4,6 +4,8 @@
     <side-menu
       :collapsed="collapsed"
       :collapsible="true"
+      :theme="theme"
+      :menuData="list"
     />
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
@@ -55,15 +57,69 @@ export default defineComponent({
     return {
       // selectedKeys: ["1"],
       minHeight: window.innerHeight - 64 - 122,
-      collapsed: false,
-      showSetting: false,
-      drawerOpen: false,
+      // collapsed: false,
+      // showSetting: false,
+      // drawerOpen: false,
+       list: [
+        {
+          key: '1',
+          title: '项目信息管理',
+          path: '/infomationManage',
+          icon:'iconfont icon-information'
+        },
+        {
+          key: '2',
+          title: '安全信息管理',
+          path: '/safeInfoManage',
+          icon:'iconfont icon-anquan',
+          children: [
+            {
+              key: '2.1',
+              title: '安全风险管理',
+              path: '/safeRisk',
+              icon:'',
+              children: [
+                { 
+                  key: '2.1.1',
+                  title: '风险分类管理',
+                  path: '/riskClassifyManage',
+                  icon:'',
+                },
+                {
+                    key: '2.1.2',
+                    title: '分类辨识',
+                    path: '/classifyIdentity',
+                    icon:'',
+                }
+              ],
+            },
+          ],
+        },
+        {
+          key: '3',
+          title: '质量信息管理',
+          path: '/qualityInfoManage',
+          icon:'iconfont icon-zhiliang',
+          children:[
+              {
+                  key: '3.1',
+                  title: '质量控制点管理',
+                  path: '/controlPointManage',
+                  icon:'',
+              }
+          ]
+        }
+      ],
     };
   },
-  // setup() {
-  //   const collapsed = ref(false);
-  //   return { collapsed };
-  // },
+  setup() {
+    const theme = ref('light');
+    const collapsed = ref(false);
+    const showSetting = ref(false);
+    const drawerOpen = ref(false);
+
+    return { theme,collapsed,showSetting,drawerOpen };
+  },
 });
 </script>
 
