@@ -1,12 +1,19 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
-    <!-- <side-menu :collapsed="collapsed" :collapsible="true" /> -->
-    <side-menu
-      :collapsed="collapsed"
+    <!-- <side-menu
+      v-model:collapsed="collapsed"
       :collapsible="true"
       :theme="theme"
       :menuData="list"
-    />
+    /> -->
+    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible class="layout-sider">
+      <!--      网站logo start-->
+      <logo :collapsed="collapsed"/>
+      <!--      网站logo end-->
+      <!--      侧边菜单栏start-->
+      <side-menu :collapsed="collapsed" :menuData="list" :theme="theme"/>
+      <!--      侧边菜单栏end-->
+    </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
         <menu-unfold-outlined
@@ -20,6 +27,8 @@
           @click="() => (collapsed = !collapsed)"
         />
       </a-layout-header>
+      <!--      页头 start-->
+      <!-- <page-header v-model:collapsed="collapsed"/> -->
       <a-layout-content
         :style="{
           margin: '24px 16px',
@@ -28,7 +37,7 @@
           minHeight: '280px',
         }"
       >
-        Content
+        <router-view/>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -36,22 +45,19 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import {
-  // UserOutlined,
-  // VideoCameraOutlined,
-  // UploadOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from "@ant-design/icons-vue";
-import SideMenu from "@/components/menu/SideMenu.vue";
+
+import SideMenu from "@/layouts/menu/SideMenu.vue";
+import Logo from '@/layouts/logo/index.vue'
+// import PageHeader from '@/layouts/header/index.vue'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
+
 export default defineComponent({
   components: {
-    // UserOutlined,
-    // VideoCameraOutlined,
-    // UploadOutlined,
+    SideMenu,
+    Logo,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    SideMenu,
+    // PageHeader,
   },
   data() {
     return {
@@ -62,10 +68,8 @@ export default defineComponent({
       // drawerOpen: false,
       list: [
         {
-          path: "/demos",
-          name: 'demos',
-          redirect: "/demos/custom-a-custom-modal",
-          // component: markRaw(RouterTransition),
+          path: "/about",
+          name: 'About',
           meta: {
             title: "demo演示",
             icon: "icon-zhuomian",
@@ -73,40 +77,28 @@ export default defineComponent({
           },
           children: [
             {
-              path: "custom-a-custom-modal",
-              name: `demos-custom-modal`,
-              meta: {
-                title: "自定义模态框",
-                icon: "icon-zhuomian",
-              },
-              component: () => import(/* webpackChunkName: "demos-custom-a-custom-modal" */ '@/views/demo/custom-modal.vue')
-            },
-            {
-              path: "button",
-              name: `demos-button`,
+              path: "item",
+              name: `About-item`,
               meta: {
                 title: "按钮的扩展",
                 icon: "icon-zhuomian",
-              },
-              component: () => import(/* webpackChunkName: "demos-custom-a-custom-modal" */ '@/views/demo/custom-modal.vue')
+              }
             },
             {
               path: "form",
-              name: `demos-form`,
+              name: `About-form`,
               meta: {
                 title: "验证表单",
                 icon: "icon-zhuomian",
-              },
-              component: () => import(/* webpackChunkName: "demos-custom-a-custom-modal" */ '@/views/demo/custom-modal.vue')
+              }
             },
             {
               path: "icons",
-              name: `demos-icons`,
+              name: `About-icons`,
               meta: {
                 title: "自定义图标",
                 icon: "icon-zhuomian",
-              },
-              component: () => import(/* webpackChunkName: "demos-custom-a-custom-modal" */ '@/views/demo/custom-modal.vue')
+              }
             },
           ],
         },
@@ -114,8 +106,8 @@ export default defineComponent({
     };
   },
   setup() {
-    const theme = ref("light");
-    const collapsed = ref(false);
+    const theme = ref("dark");
+    const collapsed = ref<boolean>(false);
     const showSetting = ref(false);
     const drawerOpen = ref(false);
 

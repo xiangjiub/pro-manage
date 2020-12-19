@@ -41,7 +41,7 @@ export default defineComponent({
         const wrapStyleRef = computed(() => {
             const {color, size} = props
 
-            const fs = isString(size) ? parseFloat(size) : size
+            const fs = isString(size) ? parseFloat('16') : size
 
             return {
                 color,
