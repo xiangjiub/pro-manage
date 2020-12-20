@@ -83,7 +83,7 @@ export default defineComponent({
     // 点击菜单
     const clickMenuItem = (e: any) => {
       console.log(e.key);
-      router.push({path: e.key})
+      router.push({name: e.key})
     }
     return {
       inlineIndent,

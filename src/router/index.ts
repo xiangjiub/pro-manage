@@ -1,68 +1,94 @@
 import store from '@/store'
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/login/index.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import { App } from "vue";
+import { createRouterGuards } from './router-guards'
+// import shared from "@/router/modules/shared"
+import shared from './modules/shared'
+import { errorRoutes } from "@/router/modules/error"
+import common from "@/router/common"
 
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'Login',
-    component: Login,
-    meta:{
-      isLogin:false
-    }
-  },
+
+
+export const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'Home',
     component: AdminLayout,
-    meta:{
-      isLogin:true
-    }
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: AdminLayout,
-    redirect:'/about/item',
-    meta:{
-      isLogin:true
+    meta: {
+      title: '首页'
     },
-    children:[
-      {
-        path: 'item',
-        name: 'About-item',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-        meta:{
-          isLogin:true
-        }
-      },
-      {
-        path: 'form',
-        name: 'About-form',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/form/rule-form.vue'),
-        meta:{
-          isLogin:true
-        }
-      },
-      {
-        path: 'icons',
-        name: 'About-icons',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/form/rule-form.vue'),
-        meta:{
-          isLogin:true
-        }
-      },
-
+    children: [
+      // ...common
     ]
   },
- 
+  ...common,
+  ...shared,
+    errorRoutes
 ]
+
+// const routes: Array<RouteRecordRaw> = [
+//   {
+//     path: '/',
+//     name: 'Login',
+//     component: Login,
+//     meta:{
+//       isLogin:false
+//     }
+//   },
+//   {
+//     path: '/home',
+//     name: 'Home',
+//     component: AdminLayout,
+//     meta:{
+//       isLogin:true
+//     }
+//   },
+//   {
+//     path: '/about',
+//     name: 'About',
+//     component: AdminLayout,
+//     redirect:'/about/item',
+//     meta:{
+//       isLogin:true
+//     },
+//     children:[
+//       {
+//         path: 'item',
+//         name: 'About-item',
+//         component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+//         meta:{
+//           isLogin:true
+//         }
+//       },
+//       {
+//         path: 'form',
+//         name: 'About-form',
+//         component: () => import(/* webpackChunkName: "about" */ '@/views/form/rule-form.vue'),
+//         meta:{
+//           isLogin:true
+//         }
+//       },
+//       {
+//         path: 'icons',
+//         name: 'About-icons',
+//         component: () => import(/* webpackChunkName: "about" */ '@/views/form/rule-form.vue'),
+//         meta:{
+//           isLogin:true
+//         }
+//       },
+
+//     ]
+//   },
+
+// ]
 
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  // history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(''),
   routes
 })
 
@@ -82,7 +108,7 @@ const router = createRouter({
 
 //#region 
 // router.beforeEach((to, from, next) => {
- 
+
 //   //获取用户登录成功后储存的登录标志
 //   const getFlag = localStorage.getItem("token");
 //   const getid = localStorage.getItem("user");
@@ -125,18 +151,13 @@ const router = createRouter({
 // });
 //#endregion
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.isLogin) { //权限判断
-    if (localStorage.getItem('token')) { //读取token值
-    //  成功
-      next()
-    } else {
-      next({path:'/'})
-    }
-  } else {
-    // 没有meta.auth 不用管
-    next()
-  }
-});
+
+
+export function setupRouter(app: App) {
+  app.use(router)
+  // 创建路由守卫
+  createRouterGuards(router)
+}
+
 
 export default router

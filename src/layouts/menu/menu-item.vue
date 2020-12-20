@@ -1,7 +1,7 @@
 <template>
   <template v-if="!menuInfo.meta.hidden">
     <a-sub-menu
-      :key="menuInfo.path"
+      :key="menuInfo.name"
       v-bind="$attrs"
     >
       <template v-slot:title>
@@ -10,15 +10,15 @@
           <span>{{ menuInfo.meta.title }}</span>
         </span>
       </template>
-      <template v-for="item in menuInfo.children" :key="item.path">
+      <template v-for="item in menuInfo.children" :key="item.name"  v-bind="$attrs">
         <template v-if="!item.children">
-          <a-menu-item :key="item.path">
+          <a-menu-item :key="item.name">
             <!-- <UserOutlined /> -->
             <span>{{ item.meta.title }}</span>
           </a-menu-item>
         </template>
         <template v-else>
-          <menu-item :menu-info="item" :key="item.path" />
+          <menu-item :menu-info="item" :key="item.name" />
         </template>
       </template>
     </a-sub-menu>
