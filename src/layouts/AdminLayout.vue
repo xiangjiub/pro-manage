@@ -100,6 +100,22 @@ export default defineComponent({
                 icon: "icon-zhuomian",
               }
             },
+            {
+              path: "list",
+              name: `About-list`,
+              meta: {
+                title: "列表数据",
+                icon: "icon-zhuomian",
+              }
+            },
+             {
+              path: "loadlist",
+              name: `About-loadlist`,
+              meta: {
+                title: "远程列表数据",
+                icon: "icon-zhuomian",
+              }
+            },
           ],
         },
       ],

@@ -38,7 +38,22 @@ const routes: Array<RouteRecordRaw> = [
                     isLogin: true
                 }
             },
-
+            {
+                path: 'list',
+                name: 'About-list',
+                component: () => import(/* webpackChunkName: "about" */ '@/views/list/List.vue'),
+                meta: {
+                    isLogin: true
+                }
+            },
+            {
+                path: 'loadlist',
+                name: 'About-loadlist',
+                component: () => import(/* webpackChunkName: "about" */ '@/views/loadlist/loadList.vue'),
+                meta: {
+                    isLogin: true
+                }
+            },
         ]
     },
 

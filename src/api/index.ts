@@ -1,9 +1,8 @@
 // import Vue from 'vue'
 import axios from 'axios';
 import {LoginForm} from './model/LoginForm';
-axios.defaults.baseURL = 'http://localhost:3000'
-// axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem('token');
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.baseURL = 'http://localhost:3000';
+
 export default {
  
   // 登陆
@@ -16,8 +15,11 @@ export default {
     return axios.get('/home');
   },
   // 列表
-  lists: () => {
-    return axios.get('/lists');
+  userlist: () => {
+    // axios.defaults.headers.common['Authorization'] =localStorage.getItem('token');
+    axios.defaults.headers.Authorization = localStorage.getItem('token');
+    console.log(localStorage.getItem('token'));
+    return axios.get('/userlist');
   },
 //   // 添加用户
 //   adduser: (data) => {
