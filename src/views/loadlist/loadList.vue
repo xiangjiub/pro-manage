@@ -21,6 +21,18 @@ export default defineComponent({
       api.userlist().then((data: any) => {
         console.log(data);
       });
+      // const { code, result, message: msg } = await store.dispatch("user/Login")
+      //   .finally(() => {
+      //     state.loading = false;
+      //     message.destroy();
+      //   });
+
+      //  if (code == 200) {
+      //   message.success('登录成功！')
+      //   router.push("/home");
+      // } else {
+      //   message.info(msg || '登录失败')
+      // }
     };
 
     return {

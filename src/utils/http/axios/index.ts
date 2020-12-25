@@ -110,7 +110,8 @@ const transform: AxiosTransform = {
     beforeRequestHook: (config, options) => {
         const {apiUrl, joinPrefix, joinParamsToUrl, formatDate, isParseToJson} = options;
 
-        config.url = isDev ? `/api${config.url}` : `${apiUrl || ''}${config.url}`;
+        console.log(`是否为开发环境${isDev}地址${apiUrl}`);
+        config.url = isDev ? `${config.url}` : `${apiUrl || ''}${config.url}`;
 
         if (config.method === RequestEnum.GET) {
             const now = new Date().getTime();
@@ -197,7 +198,7 @@ const transform: AxiosTransform = {
 const axios = new VAxios({
     timeout: 15 * 1000,
     // 基础接口地址
-    // baseURL: globSetting.apiUrl,
+    baseURL: process.env.VUE_APP_API_URL,
     // 接口可能会有通用的地址部分，可以统一抽取出来
     // prefixUrl: prefix,
     headers: {'Content-Type': ContentTypeEnum.FORM_URLENCODED},

@@ -15,15 +15,17 @@ import {
 } from './model/userModel';
 
 enum Api {
-  login = '/admin/login',
+  login = '/login',
   logout = '/login/logout',
+  userlist = '/userlist',
 }
 
 /**
  * @description: 获取用户信息
  */
 export function getUserInfo() {
-  return http.request({
+  return http.request
+  ({
     url: Api.login,
     method: 'POST',
   }, {
@@ -39,6 +41,18 @@ export function login(params: LoginParams) {
     url: Api.login,
     method: 'POST',
     params,
+  }, {
+    isTransformRequestResult: false,
+  });
+}
+
+/**
+ * @description: 用户列表数据
+ */
+export function userlist() {
+  return http.request({
+    url: Api.userlist,
+    method: 'get'
   }, {
     isTransformRequestResult: false,
   });

@@ -33,6 +33,8 @@ import api from "@/api/index";
 import { LoginForm } from "../../api/model/LoginForm";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { message } from "ant-design-vue";
+
 export default defineComponent({
   setup() {
     const formRef = ref<any>(null);
@@ -43,38 +45,61 @@ export default defineComponent({
       password: "123456",
     });
 
+    const state = reactive({
+      loading: false,
+      formInline: {
+        username: "",
+        password: "",
+      },
+    });
+
     async function handleLogin() {
-      const loginData: LoginForm = {
+      const loginParams: LoginForm = {
         username: formData.username,
         password: formData.password,
       };
+
       console.log("开始请求");
+
+      const { code, result, message: msg } = await store.dispatch("user/Login", loginParams)
+        .finally(() => {
+          state.loading = false;
+          message.destroy();
+        });
+
+       if (code == 200) {
+        // const toPath = decodeURIComponent((router.query?.redirect || '/') as string)
+        message.success('登录成功！')
+        router.push("/home");
+      } else {
+        message.info(msg || '登录失败')
+      }
       // 1.向后台传输数据，并接收返回值
-      api.denglu(loginData).then((data: any) => {
-        console.log(data);
-        // 从后台成功取到数据
-        if (data.data.code === 200) {
-          //成功取到数据
-          localStorage.setItem("token", data.data.token); //存储token
-          localStorage.setItem("user", data.data.user); //存储用户
-          store.commit("userStatus", true);
-          store.commit("LOGIN", {
-            token: data.data.token,
-            user: data.data.user,
-          });
-          //   this.$router.push("/homes");
-          router.push("/home");
-        } else if (data.data.code === 400) {
-          console.log("密码不对");
-        } else {
-          if (data.data.status === 1000) {
-            // 没有取到数据
-            // this.$router.push("/");
-            // this.loginLoadingState = false;
-            // this.logins = "登陆";
-          }
-        }
-      });
+      // api.denglu(loginParams).then((data: any) => {
+      //   console.log(data);
+      //   // 从后台成功取到数据
+      //   if (data.data.code === 200) {
+      //     //成功取到数据
+      //     localStorage.setItem("token", data.data.token); //存储token
+      //     localStorage.setItem("user", data.data.user); //存储用户
+      //     store.commit("userStatus", true);
+      //     store.commit("LOGIN", {
+      //       token: data.data.token,
+      //       user: data.data.user,
+      //     });
+      //     //   this.$router.push("/homes");
+      //     router.push("/home");
+      //   } else if (data.data.code === 400) {
+      //     console.log("密码不对");
+      //   } else {
+      //     if (data.data.status === 1000) {
+      //       // 没有取到数据
+      //       // this.$router.push("/");
+      //       // this.loginLoadingState = false;
+      //       // this.logins = "登陆";
+      //     }
+      //   }
+      // });
     }
 
     return {
