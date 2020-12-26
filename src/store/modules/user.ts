@@ -1,6 +1,6 @@
 import {Module} from 'vuex'
 import {createStorage} from '@/utils/Storage'
-import {login, getUserInfo} from '@/api/user'
+import {login, getUserInfo,userlist} from '@/api/user'
 // import {logout} from '@/api/user'
 
 import {ACCESS_TOKEN, CURRENT_USER} from '@/store/mutation-types'
@@ -52,7 +52,7 @@ const user: Module<UserStateType, any> = {
                     const {code, message} = response
                     if (code == 200) {
 
-                        console.log(response.token)
+                        console.log(`Loginact的${response.token}`)
                         Storage.set(ACCESS_TOKEN, response.token, 7 * 24 * 60 * 60 * 1000)
                         // Storage.set(CURRENT_USER, result, 7 * 24 * 60 * 60 * 1000)
                         commit('SET_TOKEN', response.token)
@@ -101,7 +101,16 @@ const user: Module<UserStateType, any> = {
                 })
             })
         },
-
+        // 获取列表数据
+        Userlist({commit, state}){
+            return new Promise((resolve,reject) => {
+                userlist().then(response => {
+                    resolve(response)
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
         // 登出
         Logout({commit, state}) {
             return new Promise((resolve) => {

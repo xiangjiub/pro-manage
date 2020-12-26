@@ -1,22 +1,22 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 
-import {VAxios} from './Axios';
-import {AxiosTransform} from './axiosTransform';
-import {AxiosResponse} from 'axios';
+import { VAxios } from './Axios';
+import { AxiosTransform } from './axiosTransform';
+import { AxiosResponse } from 'axios';
 import qs from 'qs'
-import {checkStatus} from './checkStatus';
-import {Modal, message as Message} from "ant-design-vue";
-import {RequestEnum, ResultEnum, ContentTypeEnum} from '@/enums/httpEnum';
+import { checkStatus } from './checkStatus';
+import { Modal, message as Message } from "ant-design-vue";
+import { RequestEnum, ResultEnum, ContentTypeEnum } from '@/enums/httpEnum';
 
-import {isString} from '@/utils/is/index';
-import {setObjToUrlParams} from '@/utils/urlUtils'
+import { isString } from '@/utils/is/index';
+import { setObjToUrlParams } from '@/utils/urlUtils'
 
-import {RequestOptions, Result} from './types';
+import { RequestOptions, Result } from './types';
 
 const isDev = process.env.NODE_ENV === 'development'
 import router from '@/router'
 import store from '@/store'
-import {createStorage} from "@/utils/Storage";
+import { createStorage } from "@/utils/Storage";
 const storage = createStorage()
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -27,23 +27,23 @@ const transform: AxiosTransform = {
      * @description: 处理请求数据
      */
     transformRequestData: (res: AxiosResponse<Result>, options: RequestOptions) => {
-        const {isTransformRequestResult, isShowMessage = true,isShowErrorMessage, isShowSuccessMessage, successMessageText, errorMessageText} = options;
+        const { isTransformRequestResult, isShowMessage = true, isShowErrorMessage, isShowSuccessMessage, successMessageText, errorMessageText } = options;
 
         const reject = Promise.reject
 
-        const {data} = res;
+        const { data } = res;
         //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-        const {code, result, message} = data;
+        const { code, result, message } = data;
         // 请求成功
         const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
         // 是否显示提示信息
         if (isShowMessage) {
             if (hasSuccess && (successMessageText || isShowSuccessMessage)) { // 是否显示自定义信息提示
-                Message.success(successMessageText || message ||  '操作成功！')
+                Message.success(successMessageText || message || '操作成功！')
             } else if (!hasSuccess && (errorMessageText || isShowErrorMessage)) { // 是否显示自定义信息提示
                 Message.error(message || errorMessageText || '操作失败！')
             } else if (!hasSuccess && options.errorMessageMode === 'modal') { // errorMessageMode=‘custom-modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
-                Modal.confirm({title: '错误提示', content: message});
+                Modal.confirm({ title: '错误提示', content: message });
             }
         }
         // 不进行任何处理，直接返回
@@ -108,7 +108,7 @@ const transform: AxiosTransform = {
 
     // 请求之前处理config
     beforeRequestHook: (config, options) => {
-        const {apiUrl, joinPrefix, joinParamsToUrl, formatDate, isParseToJson} = options;
+        const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, isParseToJson } = options;
 
         console.log(`是否为开发环境${isDev}地址${apiUrl}`);
         config.url = isDev ? `${config.url}` : `${apiUrl || ''}${config.url}`;
@@ -141,8 +141,8 @@ const transform: AxiosTransform = {
             }
             // 'a[]=b&a[]=c'
             if (!isParseToJson) {
-                config.params = qs.stringify(config.params, {arrayFormat: 'brackets'})
-                config.data = qs.stringify(config.data, {arrayFormat: 'brackets'})
+                config.params = qs.stringify(config.params, { arrayFormat: 'brackets' })
+                config.data = qs.stringify(config.data, { arrayFormat: 'brackets' })
             }
         }
         return config;
@@ -154,10 +154,14 @@ const transform: AxiosTransform = {
     requestInterceptors: (config) => {
         // 请求之前处理config
         const token = store.getters.token;
+        console.log(`requestInterceptors的token${token}`);
+        console.log(config);
         if (token) {
-          // jwt token
-          config.headers.token = token;
-        }
+            // jwt token
+            //   config.headers.Authorization = token;
+            // config.headers.common['Authorization']= token;
+            config.headers.common['Authorization'] = 'Bearer ' + token;
+        } 
         return config;
     },
 
@@ -165,7 +169,7 @@ const transform: AxiosTransform = {
      * @description: 响应错误处理
      */
     responseInterceptorsCatch: (error: any) => {
-        const {response, code, message} = error || {};
+        const { response, code, message } = error || {};
         const msg: string =
             response && response.data && response.data.error ? response.data.error.message : '';
         const err: string = error.toString();
@@ -201,7 +205,7 @@ const axios = new VAxios({
     baseURL: process.env.VUE_APP_API_URL,
     // 接口可能会有通用的地址部分，可以统一抽取出来
     // prefixUrl: prefix,
-    headers: {'Content-Type': ContentTypeEnum.FORM_URLENCODED},
+    headers: { 'Content-Type': ContentTypeEnum.FORM_URLENCODED },
     // 数据处理方式
     transform,
     // 配置项，下面的选项都可以在独立的接口请求中覆盖

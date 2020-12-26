@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "outDir": "../dist/", // 注意这个路径
     "sourceMap": true,
     "baseUrl": ".",
     "noImplicitAny": false,

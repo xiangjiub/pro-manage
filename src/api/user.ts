@@ -6,56 +6,65 @@
  * @Description: In User Settings Edit
  * @FilePath: \pro-manage\src\api\user.ts
  */
-import http from '@/utils/http/axios';
+import http from "@/utils/http/axios";
 import {
   LoginParams,
   LoginResultModel,
   GetUserInfoByUserIdParams,
   GetUserInfoByUserIdModel,
-} from './model/userModel';
-
+} from "./model/userModel";
 enum Api {
-  login = '/login',
-  logout = '/login/logout',
-  userlist = '/userlist',
+  login = "/login",
+  logout = "/login/logout",
+  userlist = "/userlist",
 }
-
 /**
  * @description: 获取用户信息
  */
 export function getUserInfo() {
-  return http.request
-  ({
-    url: Api.login,
-    method: 'POST',
-  }, {
-    isTransformRequestResult: false
-  });
+  return http.request(
+    {
+      url: Api.login,
+      method: "POST",
+    },
+    {
+      isTransformRequestResult: false,
+    }
+  );
 }
 
 /**
  * @description: 用户登录
  */
 export function login(params: LoginParams) {
-  return http.request({
-    url: Api.login,
-    method: 'POST',
-    params,
-  }, {
-    isTransformRequestResult: false,
-  });
+  return http.request(
+    {
+      url: Api.login,
+      method: "POST",
+      params,
+      // headers: {
+      //   'Authorization': token
+      // }
+    },
+    {
+      isTransformRequestResult: false,
+    }
+  );
 }
 
 /**
  * @description: 用户列表数据
  */
 export function userlist() {
-  return http.request({
-    url: Api.userlist,
-    method: 'get'
-  }, {
-    isTransformRequestResult: false,
-  });
+  return http.request(
+    {
+      url: Api.userlist,
+      method: "GET",
+    },
+    {
+      isTransformRequestResult: false,
+    }
+  );
 }
 
 /**
