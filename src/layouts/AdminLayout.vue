@@ -50,7 +50,7 @@ import SideMenu from "@/layouts/menu/SideMenu.vue";
 import Logo from '@/layouts/logo/index.vue'
 // import PageHeader from '@/layouts/header/index.vue'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
-
+import {list} from './muens'
 export default defineComponent({
   components: {
     SideMenu,
@@ -66,59 +66,6 @@ export default defineComponent({
       // collapsed: false,
       // showSetting: false,
       // drawerOpen: false,
-      list: [
-        {
-          path: "/about",
-          name: 'About',
-          meta: {
-            title: "demo演示",
-            icon: "icon-zhuomian",
-            // hidden:false
-          },
-          children: [
-            {
-              path: "item",
-              name: `About-item`,
-              meta: {
-                title: "按钮的扩展",
-                icon: "icon-zhuomian",
-              }
-            },
-            {
-              path: "form",
-              name: `About-form`,
-              meta: {
-                title: "验证表单",
-                icon: "icon-zhuomian",
-              }
-            },
-            {
-              path: "icons",
-              name: `About-icons`,
-              meta: {
-                title: "自定义图标",
-                icon: "icon-zhuomian",
-              }
-            },
-            {
-              path: "list",
-              name: `About-list`,
-              meta: {
-                title: "列表数据",
-                icon: "icon-zhuomian",
-              }
-            },
-             {
-              path: "loadlist",
-              name: `About-loadlist`,
-              meta: {
-                title: "远程列表数据",
-                icon: "icon-zhuomian",
-              }
-            },
-          ],
-        },
-      ],
     };
   },
   setup() {
@@ -127,7 +74,7 @@ export default defineComponent({
     const showSetting = ref(false);
     const drawerOpen = ref(false);
 
-    return { theme, collapsed, showSetting, drawerOpen };
+    return { theme, collapsed, showSetting, drawerOpen,list };
   },
 });
 </script>

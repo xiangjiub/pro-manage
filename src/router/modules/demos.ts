@@ -54,6 +54,14 @@ const routes: Array<RouteRecordRaw> = [
                     isLogin: true
                 }
             },
+            {
+                path: "re-use",
+                name: `About-re-use`,
+                component: () => import(/* webpackChunkName: "about" */ '@/views/Re-use/ReUse.vue'),
+                meta: {
+                    isLogin: true
+                }
+            },
         ]
     },
 
