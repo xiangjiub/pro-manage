@@ -20,7 +20,8 @@ export const errorRoutes = {
     meta: {
         title: '错误页',
         icon: 'EditOutlined',
-        hidden: true
+        // hidden: true
+        isLogin: true
     },
     children: [
         {
@@ -28,7 +29,8 @@ export const errorRoutes = {
             name: `${routeName}-404`,
             meta: {
                 title: '404',
-                icon: 'UserOutlined'
+                icon: 'UserOutlined',
+                isLogin: true
             },
             component: () => import(/* webpackChunkName: "404" */ '@/views/error/404.vue')
         }

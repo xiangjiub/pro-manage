@@ -70,7 +70,7 @@ export default defineComponent({
        if (code == 200) {
         // const toPath = decodeURIComponent((router.query?.redirect || '/') as string)
         message.success('登录成功！')
-        router.push("/home");
+        router.push("/about");
       } else {
         message.info(msg || '登录失败')
       }

@@ -14,9 +14,10 @@ import common from "@/router/common"
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    path: '/home',
-    name: 'Home',
-    component: AdminLayout,
+    path: '/',
+    name: 'Layout',
+    redirect:'/about',
+    component: () => import('@/layouts/AdminLayout.vue'),
     meta: {
       title: '首页'
     },
@@ -26,7 +27,7 @@ export const routes: Array<RouteRecordRaw> = [
   },
   ...common,
   ...shared,
-    errorRoutes
+  errorRoutes
 ]
 
 // const routes: Array<RouteRecordRaw> = [
