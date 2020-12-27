@@ -50,8 +50,7 @@ export function createRouterGuards(router: Router) {
                 next()
             } else {
                 // next({path: loginRoutePath, query: {redirect: to.fullPath}, replace: true})
-                // next({ path: loginRoutePath })
-                next({ path: '/login' })
+                next({ path: loginRoutePath })
             }
         }
     });
@@ -60,6 +59,7 @@ export function createRouterGuards(router: Router) {
         if (isNavigationFailure(failure)) {
             console.log('failed navigation', failure)
         }
+        NProgress.done() 
     })
 
     router.onError(error => {
