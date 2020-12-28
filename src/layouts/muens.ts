@@ -12,7 +12,7 @@ export const list: any[] = [
                 path: "item",
                 name: `About-item`,
                 meta: {
-                    title: "按钮的扩展",
+                    title: "样式的扩展",
                     icon: "icon-zhuomian",
                 }
             },
