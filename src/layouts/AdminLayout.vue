@@ -15,7 +15,7 @@
       <!--      侧边菜单栏end-->
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
+      <!-- <a-layout-header style="background: #fff; padding: 0">
         <menu-unfold-outlined
           v-if="collapsed"
           class="trigger"
@@ -26,9 +26,9 @@
           class="trigger"
           @click="() => (collapsed = !collapsed)"
         />
-      </a-layout-header>
+      </a-layout-header> -->
       <!--      页头 start-->
-      <!-- <page-header v-model:collapsed="collapsed"/> -->
+      <page-header v-model:collapsed="collapsed"/>
       <a-layout-content
         :style="{
           margin: '24px 16px',
@@ -44,20 +44,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 
 import SideMenu from "@/layouts/menu/SideMenu.vue";
 import Logo from '@/layouts/logo/index.vue'
-// import PageHeader from '@/layouts/header/index.vue'
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
+import PageHeader from '@/layouts/header/index.vue'
 import {list} from './muens'
 export default defineComponent({
   components: {
     SideMenu,
     Logo,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    // PageHeader,
+    PageHeader,
   },
   data() {
     return {
@@ -74,7 +71,9 @@ export default defineComponent({
     const showSetting = ref(false);
     const drawerOpen = ref(false);
 
-    return { theme, collapsed, showSetting, drawerOpen,list };
+    const asiderWidth = computed(() => collapsed.value ? '80px' : '256px')
+    
+    return { theme, collapsed, showSetting, drawerOpen,list,asiderWidth };
   },
 });
 </script>

@@ -6,7 +6,7 @@
     >
       <template v-slot:title>
         <span>
-          <UserOutlined />
+          <CreditCardOutlined />
           <span>{{ menuInfo.meta.title }}</span>
         </span>
       </template>
@@ -30,9 +30,9 @@
 </template>
 
 <script lang="ts">
-import Vue, { defineComponent } from "vue";
+import { defineComponent } from "vue";
 import { Menu } from "ant-design-vue";
-import { UserOutlined } from "@ant-design/icons-vue";
+import { CreditCardOutlined } from "@ant-design/icons-vue";
 // import { IconFont } from "@/components/iconfont";
 export default defineComponent({
   name: "MenuItem",
@@ -40,7 +40,7 @@ export default defineComponent({
     // IconFont,
     "a-sub-menu": Menu.SubMenu,
     "a-menu-item": Menu.Item,
-    UserOutlined,
+    CreditCardOutlined,
   },
   props: {
     menuInfo: {

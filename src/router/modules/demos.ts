@@ -11,6 +11,7 @@ const routes: Array<RouteRecordRaw> = [
         component: AdminLayout,
         redirect: '/about/item',
         meta: {
+            title: "demo演示",
             isLogin: true
         },
         children: [
@@ -19,7 +20,8 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'About-item',
                 component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
                 meta: {
-                    isLogin: true
+                    isLogin: true,
+                    title: "样式的扩展",
                 }
             },
             {
@@ -27,6 +29,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'About-form',
                 component: () => import(/* webpackChunkName: "about" */ '@/views/form/rule-form.vue'),
                 meta: {
+                    title: "验证表单",
                     isLogin: true
                 }
             },
@@ -35,6 +38,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'About-icons',
                 component: () => import(/* webpackChunkName: "about" */ '@/views/form/rule-form.vue'),
                 meta: {
+                    title: "自定义图标",
                     isLogin: true
                 }
             },
@@ -43,6 +47,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'About-list',
                 component: () => import(/* webpackChunkName: "about" */ '@/views/list/List.vue'),
                 meta: {
+                    title: "列表数据",
                     isLogin: true
                 }
             },
@@ -51,6 +56,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'About-loadlist',
                 component: () => import(/* webpackChunkName: "about" */ '@/views/loadlist/loadList.vue'),
                 meta: {
+                    title: "远程列表数据",
                     isLogin: true
                 }
             },
@@ -59,12 +65,33 @@ const routes: Array<RouteRecordRaw> = [
                 name: `About-re-use`,
                 component: () => import(/* webpackChunkName: "about" */ '@/views/Re-use/ReUse.vue'),
                 meta: {
+                    title: "列表组件复用",
                     isLogin: true
                 }
             },
         ]
     },
-
+    {
+        path:"/system",
+        name:"System",
+        component: AdminLayout,
+        redirect: '/system/role',
+        meta:{
+            title: "系统管理",
+            isLogin: true
+        },
+        children:[
+            {
+                path: "role",
+                name: `System-role`,
+                component: () => import(/* webpackChunkName: "about" */ '@/views/auth/system/role/index.vue'),
+                meta: {
+                    title: "角色管理",
+                    isLogin: true,
+                }
+            },
+        ]
+    }
 ]
 
 export default routes

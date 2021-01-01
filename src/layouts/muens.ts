@@ -58,4 +58,22 @@ export const list: any[] = [
             },
         ],
     },
+    {
+        path:"/system",
+        name:"System",
+        meta:{
+            title: "系统管理",
+            icon: "icon-shouye",
+        },
+        children:[
+            {
+                path: "role",
+                name: `System-role`,
+                meta: {
+                    title: "角色管理",
+                    icon: "icon-zhuomian",
+                }
+            },
+        ]
+    }
 ];

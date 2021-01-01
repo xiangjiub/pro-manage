@@ -1,7 +1,10 @@
 <template>
-  <a-button type="primary" @click="loadData"> 查询 </a-button>
   <dynamic-table ref="tableRef" :columns="columns" :get-list-func="userlist" >
-   
+    <template v-slot:title>
+      <a-button  type="primary"  @click="loadData">
+          查询
+      </a-button>
+    </template>
   </dynamic-table>
 </template>
 
