@@ -24,14 +24,14 @@ export const list: any[] = [
                     icon: "icon-zhuomian",
                 }
             },
-            {
-                path: "icons",
-                name: `About-icons`,
-                meta: {
-                    title: "自定义图标",
-                    icon: "icon-zhuomian",
-                }
-            },
+            // {
+            //     path: "icons",
+            //     name: `About-icons`,
+            //     meta: {
+            //         title: "自定义图标",
+            //         icon: "icon-zhuomian",
+            //     }
+            // },
             {
                 path: "list",
                 name: `About-list`,

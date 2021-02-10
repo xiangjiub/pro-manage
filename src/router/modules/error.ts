@@ -2,6 +2,7 @@ import {RouteRecordRaw} from 'vue-router'
 // import {RouterTransition} from '@/components/transition'
 import {markRaw} from "vue";
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import { RouterTransition } from '@/components/transition';
 
 const routeName = 'error'
 
@@ -17,6 +18,7 @@ export const errorRoutes = {
     name: routeName,
     redirect: '/error/404',
     component: AdminLayout,
+    // component: markRaw(RouterTransition),
     meta: {
         title: '错误页',
         icon: 'EditOutlined',

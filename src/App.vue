@@ -1,15 +1,27 @@
 <template>
-  <div id="nav">
-    <!-- <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> -->
-  </div>
-  <router-view />
+  <!-- <div> -->
+    <config-provider :locale="zhCN">
+      <router-view v-slot="{ Component }">
+        <component :is="Component" />
+      </router-view>
+    </config-provider>
+  <!-- </div> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { ConfigProvider } from "ant-design-vue";
+import zhCN from "ant-design-vue/es/locale/zh_CN";
+
 export default defineComponent({
-  components: {},
+  components: {
+    ConfigProvider,
+  },
+  setup() {
+    return {
+      zhCN,
+    };
+  },
 });
 </script>
 <style lang="scss">
